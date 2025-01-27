@@ -1,0 +1,29 @@
+import java.util.*;
+class Main {
+    public static void main(String[] args) {
+        System.out.println(Arrays.toString(val("12+2",2,'+')));
+    }
+    
+    public static String[] val(String s, int curr,char ch){
+        int lidx=curr-1,ridx=curr+1;
+        StringBuilder sb =new StringBuilder(s);
+        while(lidx>=0 && Character.isDigit(s.charAt(lidx))){
+            lidx--;
+        }
+
+        while(ridx<s.length() && Character.isDigit(s.charAt(ridx))){
+            ridx++;
+        }
+        lidx++; ridx--;
+
+        int left=Integer.parseInt(s.substring(lidx,curr));
+        int right =Integer.parseInt(s.substring(curr+1,ridx+1));
+            int a=0;
+        if(ch=='*') a= left*right;
+        else if(ch=='+') a= left+right;
+        else if(ch=='-') a=left-right;
+        else if(ch=='/' && right!=0) a=left/right;
+         sb.replace(lidx,ridx+1,Integer.toString(a));
+        return new String[]{sb.toString(),Integer.toString(lidx),Integer.toString(ridx)};
+    }
+}
